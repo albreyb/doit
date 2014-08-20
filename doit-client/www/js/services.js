@@ -198,6 +198,29 @@ angular.module('doit.services', ['ionic'])
     return recentEvents;
 })
 
+.factory('serverRequest', function($http){
+  var requestObject = {};
+
+  requestObject.get = function(route){
+    return $http.get('do-it-server.cloudapp.net/' + route)
+          .success(function(data, status, headers, config){
+            console.log(data);
+           })
+          .error(function(data, status, headers, config){
+            console.log(data);
+          });
+  };
+
+  requestObject.post = function(route, data){
+    return $http.post('do-it-server.cloudapp.net/' + route, data)
+            .success(function(){
+              console.log('data has been posted');
+            });
+  };
+
+  return requestObject;
+})
+
 .factory('OpenFB', function ($rootScope, $q, $window, $http, MatchLoader) {
 
     var FB_LOGIN_URL = 'http://zavadil7.cloudapp.net/auth/facebook';
@@ -410,11 +433,11 @@ angular.module('doit.services', ['ionic'])
 });
 
 // Global function called back by the OAuth login dialog
-function oauthCallback(url) {
-    var injector = angular.element(document.getElementById('main')).injector();
-    injector.invoke(function (OpenFB) {
-        OpenFB.oauthCallback(url);
-    });
-}
+// function oauthCallback(url) {
+//     var injector = angular.element(document.getElementById('main')).injector();
+//     injector.invoke(function (OpenFB) {
+//         OpenFB.oauthCallback(url);
+//     });
+// }
 
 
