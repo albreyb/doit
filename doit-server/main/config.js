@@ -1,12 +1,6 @@
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var middle = require('./middleware');
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    database : 'doit'
-});
 
 module.exports = exports = function(app, express){
 
